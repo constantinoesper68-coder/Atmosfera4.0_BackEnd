@@ -1,0 +1,34 @@
+// =====================================================================
+//  PROJETO ATMOSFERA 4.0 — EQUIPE DEV · BACK-END
+//  build.gradle: a "lista de compras" do projeto
+//
+//  É o MESMO build.gradle do MuralRecados. A única biblioteca externa
+//  continua sendo o driver JDBC do MySQL. Sem ele, o Main compila,
+//  mas quebra ao rodar com:
+//    SQLException: No suitable driver found for jdbc:mysql://...
+//  (o bug que enfrentamos no Mural — lembra?)
+// =====================================================================
+
+plugins {
+    id 'java'
+}
+
+group = 'org.example'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()   // de onde o Gradle baixa as bibliotecas
+}
+
+dependencies {
+    testImplementation platform('org.junit:junit-bom:6.0.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+    // driver JDBC do MySQL: "implementation" = entra quando o Main roda de verdade
+    implementation 'com.mysql:mysql-connector-j:9.4.0'
+}
+
+test {
+    useJUnitPlatform()
+}
